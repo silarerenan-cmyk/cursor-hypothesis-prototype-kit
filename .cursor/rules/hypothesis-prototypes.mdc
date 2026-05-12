@@ -1,0 +1,49 @@
+---
+description: Conventions for low-code Hexa-themed hypothesis prototypes under prototypes/
+globs: prototypes/**/*
+alwaysApply: false
+---
+
+# Hexa Prototype Conventions
+
+Anything under `prototypes/` is a low-code, navigable prototype that ships with the **Hexa design system port** (Bees Yellow theme) and built-in usage tracking.
+
+## Non-negotiables
+
+- **Vanilla HTML/CSS/JS only.** No bundlers, no React, no npm.
+- **One folder per prototype**: `prototypes/<kebab-id>/index.html` (+ optional `styles.css`, `HYPOTHESIS.md`).
+- **Always include the four base assets**:
+  ```html
+  <link rel="stylesheet" href="../_shared/hexa-tokens.css" />
+  <link rel="stylesheet" href="../_shared/hexa-components.css" />
+  <script src="../_shared/hexa.js" defer></script>
+  <script src="../_shared/hypothesis-tracker.js" data-prototype-id="…" data-hypothesis="…"></script>
+  ```
+- **Never edit `prototypes/_shared/`** unless explicitly extending the design system.
+
+## Use Hexa primitives — not raw HTML
+
+| BAD | GOOD |
+|---|---|
+| `<button class="my-btn">` | `<button class="hexa-btn hexa-btn--primary">` |
+| `<input class="custom-input">` | `<label class="hexa-field"><span class="hexa-label">…</span><span class="hexa-input-wrap"><input class="hexa-input"/></span></label>` |
+| `<svg>...</svg>` (custom) | `<hexa-icon name="CartIcon"></hexa-icon>` |
+| Inline hex colors | Token vars (`var(--hexa-fg-neutral-primary)`) |
+
+If a primitive is missing, browse `prototypes/_shared/gallery.html` for the catalog before inventing one.
+
+## Tag every measurable CTA
+
+```html
+<button class="hexa-btn hexa-btn--primary" data-track="cta-hero-primary">Sign up</button>
+```
+
+For non-click milestones: `HT.track('signup_completed', { plan: 'pro' })`.
+
+## Privacy
+
+Form values are **not** captured by default. Add `data-track-value="true"` only for non-PII fields (plan choice, rating, segment) AND document it in `HYPOTHESIS.md`.
+
+## Registering a prototype
+
+After scaffolding, append the entry to `prototypes/prototypes.json`. Don't rewrite the file — read, push, write back.
