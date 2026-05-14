@@ -36,3 +36,16 @@ Send them the HTTPS clone URL, for example:
 `https://github.com/<YOUR_USER_OR_ORG>/cursor-hypothesis-prototype-kit.git`
 
 They follow [README.md](README.md) **Install**.
+
+## 4. Enable GitHub Pages (one-time; fixes failed `deploy` workflow)
+
+The workflow [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) uses **GitHub Actions** as the Pages publisher. If Pages is off or still set to “Deploy from a branch”, the job **Configure GitHub Pages** fails with *Get Pages site … Not Found*.
+
+Do this once on the GitHub repo:
+
+1. Open **Settings** → **Pages** (under “Code and automation”).
+2. Under **Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+3. Save if prompted.
+4. Go to **Actions** → workflow **Deploy to GitHub Pages** → open the latest run → **Re-run all jobs** (or push any commit to `main`).
+
+After that, the site URL is shown on the successful run (and under **Settings** → **Pages**). Prototypes are served under paths like `https://<user>.github.io/<repo>/prototypes/<id>/`.

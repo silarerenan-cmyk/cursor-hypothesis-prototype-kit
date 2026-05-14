@@ -1,3 +1,12 @@
+# Deploys the repo root as a static site to GitHub Pages.
+#
+# One-time per repository (required or configure-pages fails with "Get Pages site ... Not Found"):
+#   GitHub → Settings → Pages → Build and deployment → Source: GitHub Actions
+# Then re-run this workflow (Actions tab → Deploy to GitHub Pages → Re-run jobs).
+#
+# Optional: actions/configure-pages "enablement" needs a token other than GITHUB_TOKEN (e.g. PAT);
+# enabling Pages in the UI avoids that.
+
 name: Deploy to GitHub Pages
 
 on:
